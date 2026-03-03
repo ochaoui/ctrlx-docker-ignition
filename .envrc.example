@@ -1,0 +1,7 @@
+TARGET_ARCH="amd64"  # amd64 = X5/X7 | arm64 = X3
+IMAGE_NAME="inductiveautomation/ignition"
+IMAGE_TAG="latest"
+GATEWAY_ADMIN_USERNAME="admin"
+GATEWAY_ADMIN_PASSWORD="changeme"
+IGNITION_EDITION="edge"
+ACCEPT_IGNITION_EULA="Y"

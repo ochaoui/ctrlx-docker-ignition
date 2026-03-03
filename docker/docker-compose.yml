@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  ignition:
+    image: ${IMAGE_NAME}:${IMAGE_TAG}
+    container_name: ignition
+    ports:
+      - "9088:8088"
+      - "9043:8043"
+      - "8060:8060"
+    environment:
+      - ACCEPT_IGNITION_EULA=${ACCEPT_IGNITION_EULA}
+      - IGNITION_EDITION=${IGNITION_EDITION}
+      - GATEWAY_ADMIN_USERNAME=${GATEWAY_ADMIN_USERNAME}
+      - GATEWAY_ADMIN_PASSWORD=${GATEWAY_ADMIN_PASSWORD}
+    volumes:
+      - ignition_data:/usr/local/bin/ignition/data
+    restart: unless-stopped
+
+volumes:
+  ignition_data:

@@ -1,0 +1,35 @@
+name: ctrlx-docker-ignition
+adopt-info: docker-compose
+summary: Ignition SCADA gateway for ctrlX CORE
+description: |
+  This snap contains the Docker image 'inductiveautomation/ignition'.
+  The files 'image.tar.gz', 'docker-compose.yml' and 'docker-compose.env'
+  are provided via content-interface 'docker-compose'.
+  No internet access required on the device.
+base: core22
+confinement: strict
+grade: stable
+
+parts:
+  docker-compose:
+    plugin: dump
+    source: ./docker
+    override-pull: |
+      craftctl default
+      craftctl set version="${DOCKER_IMAGE_VERSION}"
+    organize:
+      '*': docker-compose/${SNAPCRAFT_PROJECT_NAME}/
+
+slots:
+  docker-compose:
+    interface: content
+    content: docker-compose
+    source:
+      read:
+        - $SNAP/docker-compose/${SNAPCRAFT_PROJECT_NAME}
+  docker-volumes:
+    interface: content
+    content: docker-volumes
+    source:
+      write:
+        - $SNAP_DATA/docker-volumes/${SNAPCRAFT_PROJECT_NAME}
